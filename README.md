@@ -1,11 +1,11 @@
-# Ember-profiler
+# Ember-ajax-profiler
 
 This README outlines the details of collaborating on this Ember addon.
 
 ## Installation
 
-* `git clone <repository-url>` this repository
-* `cd ember-profiler`
+* `git clone https://github.com/felis-linx/ember-ajax-profiler` this repository
+* `cd ember-ajax-profiler`
 * `npm install`
 * `bower install`
 

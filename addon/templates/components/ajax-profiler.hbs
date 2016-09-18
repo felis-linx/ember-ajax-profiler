@@ -1,0 +1,39 @@
+<div style="position:fixed;top: 10px;left: 10px;z-index: 1000;background: rgba(255,255,255,0.85);padding: 7px 7px 0 7px;max-width: 35%;">
+  <div style="margin: -7px;margin-bottom: 0px;padding: 3px 0;background-color: rgba(220,120,0,1);color: white;text-align: center;min-width: 150px;">
+  Profiler
+  </div>
+  <div style="max-height: 300px; overflow-y: scroll">
+{{#each ajax.profiling as |request|}}
+    <div style="margin: 5px 0;">
+      <code class="{{unless request.duration 'muted'}}{{if request.duration (if request.error 'text-error' 'text-success')}}">
+        {{request.method}} {{request.url}}
+  {{#if request.duration}}
+        ({{request.duration}})
+    {{#if request.error}}
+            <span>&ndash; {{request.error.status}} {{request.error.title}}</span>
+    {{/if}}
+  {{else}}
+        <i class="icon ion-load-d icon-spin"></i>
+        <!--span class="glyphicon glyphicon-refresh glyphicon-spin" aria-hidden="true"></span-->
+  {{/if}}
+      </code>
+  {{#each-in fields as |field name|}}
+    {{#if (get request field)}}
+      <div>
+        <strong>{{name}}</strong>
+      {{#each-in (get request field) as |key value|}}
+        {{#if value}}
+        <div style="white-space: nowrap; font-size:9pt; margin-left: 5px;">
+          <strong class="muted">{{key}}</strong>
+          <span>{{value}}</span>
+        </div>
+        {{/if}}
+      {{/each-in}}
+      </div>
+    {{/if}}
+  {{/each-in}}
+    </div>
+{{/each}}
+  </div>
+</div>
+{{yield}}

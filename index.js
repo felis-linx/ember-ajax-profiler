@@ -2,5 +2,5 @@
 'use strict';
 
 module.exports = {
-  name: 'ember-profiler'
+  name: 'ember-ajax-profiler'
 };

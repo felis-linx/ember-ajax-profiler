@@ -1,7 +1,7 @@
 {
-  "name": "ember-profiler",
+  "name": "ember-ajax-profiler",
   "dependencies": {
-    "ember": "~2.8.0",
+    "ember": "^2.5.0",
     "ember-cli-shims": "0.1.1"
   }
 }
