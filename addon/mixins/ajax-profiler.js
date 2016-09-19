@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import parseJson from '../utils/parse-json';
+import flattenObject from '../utils/flatten-object';
 
 export default Ember.Mixin.create({
     
@@ -23,7 +24,7 @@ export default Ember.Mixin.create({
       
       console.log(typeof options.data, options.data);
       if (Ember.isPresent(options.data)) {
-        request.data = Ember.typeOf(options.data) !== 'object' ? parseJson(options.data) : options.data;
+        request.data = flattenObject(Ember.typeOf(options.data) !== 'object' ? parseJson(options.data) : options.data);
       }
       
       let start = performance.now();
@@ -31,7 +32,7 @@ export default Ember.Mixin.create({
       this._super(url, options)
         .then(function(response) {
           Ember.Logger.log('[Ajax profiler]', response);
-          Ember.set(request, 'result', response);
+          Ember.set(request, 'result', flattenObject(response));
           resolve(response);
         }, function(error) {
           Ember.Logger.warn('[Ajax profiler]', error);
@@ -40,6 +41,7 @@ export default Ember.Mixin.create({
           if (error.hasOwnProperty('errors')) {
             _error.status = error.errors[0].status;
             _error.title = error.errors[0].title;
+            _error.detail = flattenObject(error.errors[0].detail);
 //            for(let key of error.errors) {
 //              _error[key] = error.errors[key];
 //            }
